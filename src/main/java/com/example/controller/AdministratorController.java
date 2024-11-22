@@ -76,6 +76,10 @@ public class AdministratorController {
 	 */
 	@PostMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result) {
+		if (administratorService.searchByEmail(form.getMailAddress()) != null) {
+			result.rejectValue("mailAddress", "email.alreadyExists", "既に登録されているメールアドレスです");
+		}
+
 		if (!form.getPassword().equals(form.getConfirmPassword())) {
 			result.rejectValue("confirmPassword", "password.mismatch", "パスワードが一致しません");
 		}
