@@ -80,6 +80,10 @@ public class AdministratorController {
 			result.rejectValue("mailAddress", "email.alreadyExists", "既に登録されているメールアドレスです");
 		}
 
+		if (!form.getPassword().equals(form.getConfirmPassword())) {
+			result.rejectValue("confirmPassword", "password.mismatch", "パスワードが一致しません");
+		}
+
 		if (result.hasErrors()) {
 			return toInsert();
 		}
