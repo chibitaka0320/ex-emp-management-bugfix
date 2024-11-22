@@ -9,7 +9,7 @@ import com.example.repository.AdministratorRepository;
 
 /**
  * 管理者情報を操作するサービス.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -22,7 +22,7 @@ public class AdministratorService {
 
 	/**
 	 * 管理者情報を登録します.
-	 * 
+	 *
 	 * @param administrator 管理者情報
 	 */
 	public void insert(Administrator administrator) {
@@ -31,7 +31,7 @@ public class AdministratorService {
 
 	/**
 	 * ログインをします.
-	 * 
+	 *
 	 * @param mailAddress メールアドレス
 	 * @param password    パスワード
 	 * @return 管理者情報 存在しない場合はnullが返ります
@@ -39,5 +39,15 @@ public class AdministratorService {
 	public Administrator login(String mailAddress, String password) {
 		Administrator administrator = administratorRepository.findByMailAddressAndPassward(mailAddress, password);
 		return administrator;
+	}
+
+	/**
+	 * メールアドレスから管理者情報を取得します.
+	 *
+	 * @param mailAddress メールアドレス
+	 * @return 管理者情報 存在しない場合なnullが返ります
+	 */
+	public Administrator searchByEmail(String mailAddress) {
+		return administratorRepository.findByMailAddress(mailAddress);
 	}
 }
