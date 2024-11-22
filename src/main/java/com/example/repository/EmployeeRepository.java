@@ -14,9 +14,9 @@ import com.example.domain.Employee;
 
 /**
  * employeesテーブルを操作するリポジトリ.
- * 
+ *
  * @author igamasayuki
- * 
+ *
  */
 @Repository
 public class EmployeeRepository {
@@ -46,11 +46,11 @@ public class EmployeeRepository {
 
 	/**
 	 * 従業員一覧情報を入社日順で取得します.
-	 * 
+	 *
 	 * @return 全従業員一覧 従業員が存在しない場合はサイズ0件の従業員一覧を返します
 	 */
 	public List<Employee> findAll() {
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees";
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees ORDER BY hire_date DESC,mail_address DESC";
 
 		List<Employee> developmentList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 
@@ -59,7 +59,7 @@ public class EmployeeRepository {
 
 	/**
 	 * 主キーから従業員情報を取得します.
-	 * 
+	 *
 	 * @param id 検索したい従業員ID
 	 * @return 検索された従業員情報
 	 * @exception org.springframework.dao.DataAccessException 従業員が存在しない場合は例外を発生します
