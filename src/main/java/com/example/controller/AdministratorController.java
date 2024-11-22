@@ -71,11 +71,16 @@ public class AdministratorController {
 	/**
 	 * 管理者情報を登録します.
 	 *
-	 * @param form 管理者情報用フォーム
+	 * @param form   管理者情報用フォーム
+	 * @param result バリデーション結果
 	 * @return ログイン画面へリダイレクト
 	 */
 	@PostMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result) {
+		if (result.hasErrors()) {
+			return toInsert();
+		}
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
