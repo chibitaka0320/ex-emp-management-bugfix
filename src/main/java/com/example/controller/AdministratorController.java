@@ -77,7 +77,7 @@ public class AdministratorController {
 	@PostMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result) {
 		if (administratorService.searchByEmail(form.getMailAddress()) != null) {
-			result.rejectValue("mailAddress", "This email address is already registered.", "既に登録されているメールアドレスです");
+			result.rejectValue("mailAddress", "email.alreadyExists", "既に登録されているメールアドレスです");
 		}
 
 		if (result.hasErrors()) {
