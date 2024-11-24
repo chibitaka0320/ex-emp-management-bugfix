@@ -11,7 +11,7 @@ import com.example.repository.EmployeeRepository;
 
 /**
  * 従業員情報を操作するサービス.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -24,7 +24,7 @@ public class EmployeeService {
 
 	/**
 	 * 従業員情報を全件取得します.
-	 * 
+	 *
 	 * @return 従業員情報一覧
 	 */
 	public List<Employee> showList() {
@@ -34,7 +34,7 @@ public class EmployeeService {
 
 	/**
 	 * 従業員情報を取得します.
-	 * 
+	 *
 	 * @param id ID
 	 * @return 従業員情報
 	 * @throws org.springframework.dao.DataAccessException 検索されない場合は例外が発生します
@@ -46,10 +46,26 @@ public class EmployeeService {
 
 	/**
 	 * 従業員情報を更新します.
-	 * 
+	 *
 	 * @param employee 更新した従業員情報
 	 */
 	public void update(Employee employee) {
 		employeeRepository.update(employee);
+	}
+
+	/**
+	 * 名前が一致(曖昧)した従業員情報を取得します.
+	 *
+	 * @param name 従業員名
+	 * @return 従業員情報一覧
+	 */
+	public List<Employee> searchByName(String name) {
+		List<Employee> employeeList = null;
+		if (name.isBlank()) {
+			employeeList = showList();
+		} else {
+			employeeList = employeeRepository.findByName(name);
+		}
+		return employeeList;
 	}
 }
