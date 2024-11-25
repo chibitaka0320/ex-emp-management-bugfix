@@ -18,11 +18,9 @@ import com.example.domain.LoginAdministrator;
 import com.example.form.UpdateEmployeeForm;
 import com.example.service.EmployeeService;
 
-import jakarta.servlet.http.HttpSession;
-
 /**
  * 従業員情報を操作するコントローラー.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -33,12 +31,9 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@Autowired
-	private HttpSession session;
-
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -51,13 +46,12 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員一覧画面を出力します.
-	 * 
+	 *
 	 * @param model モデル
 	 * @return 従業員一覧画面
 	 */
 	@GetMapping("/showList")
 	public String showList(@AuthenticationPrincipal LoginAdministrator userDetails, Model model) {
-		session.setAttribute("administratorName", userDetails.getUsername());
 		List<Employee> employeeList = employeeService.showList();
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
@@ -68,7 +62,7 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員詳細画面を出力します.
-	 * 
+	 *
 	 * @param id    リクエストパラメータで送られてくる従業員ID
 	 * @param model モデル
 	 * @return 従業員詳細画面
@@ -85,7 +79,7 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員詳細(ここでは扶養人数のみ)を更新します.
-	 * 
+	 *
 	 * @param form 従業員情報用フォーム
 	 * @return 従業員一覧画面へリダクレクト
 	 */
