@@ -20,7 +20,12 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/employee/showList")
                 .failureUrl("/?result=error")
                 .usernameParameter("mailAddress")
-                .passwordParameter("password"));
+                .passwordParameter("password")
+                .permitAll());
+
+        http.authorizeHttpRequests(authz -> authz
+                .requestMatchers("/", "/toInsert", "/insert", "/css/**", "/img/**", "/js/**").permitAll()
+                .anyRequest().authenticated());
 
         return http.build();
     }
