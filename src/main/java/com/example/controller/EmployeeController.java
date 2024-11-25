@@ -18,7 +18,7 @@ import com.example.service.EmployeeService;
 
 /**
  * 従業員情報を操作するコントローラー.
- * 
+ *
  * @author igamasayuki
  *
  */
@@ -31,7 +31,7 @@ public class EmployeeController {
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
+	 *
 	 * @return フォーム
 	 */
 	@ModelAttribute
@@ -44,7 +44,7 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員一覧画面を出力します.
-	 * 
+	 *
 	 * @param model モデル
 	 * @return 従業員一覧画面
 	 */
@@ -60,7 +60,7 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員詳細画面を出力します.
-	 * 
+	 *
 	 * @param id    リクエストパラメータで送られてくる従業員ID
 	 * @param model モデル
 	 * @return 従業員詳細画面
@@ -77,7 +77,7 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 	/**
 	 * 従業員詳細(ここでは扶養人数のみ)を更新します.
-	 * 
+	 *
 	 * @param form 従業員情報用フォーム
 	 * @return 従業員一覧画面へリダクレクト
 	 */
@@ -91,5 +91,27 @@ public class EmployeeController {
 		employee.setDependentsCount(form.getIntDependentsCount());
 		employeeService.update(employee);
 		return "redirect:/employee/showList";
+	}
+
+	/////////////////////////////////////////////////////
+	// ユースケース：従業員情報を名前で検索する(曖昧検索)
+	/////////////////////////////////////////////////////
+	/**
+	 * 従業員情報を検索します.
+	 *
+	 * @param name  従業員名
+	 * @param model モデル
+	 * @return 従業員詳細画面
+	 */
+	@GetMapping("/search")
+	public String search(String name, Model model) {
+		List<Employee> employeeList = employeeService.searchByName(name);
+		if (employeeList.size() == 0) {
+			model.addAttribute("message", "1件もありませんでした");
+			employeeList = employeeService.showList();
+		}
+
+		model.addAttribute("employeeList", employeeList);
+		return "employee/list";
 	}
 }
