@@ -98,4 +98,15 @@ public class EmployeeRepository {
 
 		return employeeList;
 	}
+
+	/**
+	 * 従業員情報の名前一覧を取得します.
+	 *
+	 * @return 従業員情報の名前一覧
+	 */
+	public List<String> findAllNameList() {
+		String sql = "SELECT name FROM employees ORDER BY hire_date DESC,mail_address ASC";
+		List<String> employeeNameList = template.queryForList(sql, new MapSqlParameterSource(), String.class);
+		return employeeNameList;
+	}
 }

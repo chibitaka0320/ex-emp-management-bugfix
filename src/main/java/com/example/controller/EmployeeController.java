@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.domain.Employee;
 import com.example.domain.LoginAdministrator;
@@ -115,5 +116,19 @@ public class EmployeeController {
 
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
+	}
+
+	/////////////////////////////////////////////////////
+	// ユースケース：従業員情報を名前で検索する(オートコンプリート)
+	/////////////////////////////////////////////////////
+	/**
+	 * 従業員情報の名前一覧を取得します.
+	 *
+	 * @return 従業員情報の名前一覧
+	 */
+	@ResponseBody
+	@GetMapping("/autocomplete")
+	public List<String> autocomplete() {
+		return employeeService.getNameList();
 	}
 }
