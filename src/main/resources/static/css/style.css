@@ -13,3 +13,9 @@
 .emp-img {
   width: 70px;
 }
+
+.gender {
+  text-align: center;
+  display: flex;
+  align-items: center;
+}

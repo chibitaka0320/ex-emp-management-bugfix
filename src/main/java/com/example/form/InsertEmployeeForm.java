@@ -46,7 +46,7 @@ public class InsertEmployeeForm {
     @Size(max = 500, message = "特性は500字以内で入力してください")
     private String characteristics;
     /** 扶養人数 */
-    @Pattern(regexp = "^[0-9]+$", message = "給料は数値で入力してください")
+    @Pattern(regexp = "^[0-9]+$", message = "扶養人数は数値で入力してください")
     private String dependentsCount;
 
     public String getName() {

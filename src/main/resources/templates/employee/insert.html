@@ -101,14 +101,12 @@
                                         <label th:errors="*{gender}" class="error-messages">
                                             性別を入力してください
                                         </label>
-                                        <label class="control-label" style="color: red" for="gender"></label>
-                                        <select name="gender" id="gender" th:value="*{gender}" class="form-control"
-                                            th:errorclass="error-input">
-                                            <option selected disabled>--性別を選択--</option>
-                                            <option th:selected="*{gender == '男性'}">男性</option>
-                                            <option th:selected="*{gender == '女性'}">女性</option>
-                                            <option th:selected="*{gender == 'その他'}">その他</option>
-                                        </select>
+                                        <label class="gender"><input type="radio" name="gender" value="男性"
+                                                checked>男性</label>
+                                        <label class="gender"><input type="radio" name="gender" value="女性"
+                                                th:checked="*{gender} == '女性'">女性</label>
+                                        <label class="gender"><input type="radio" name="gender" value="その他"
+                                                th:checked="*{gender} == 'その他'">その他</label>
                                     </td>
                                 </tr>
                                 <tr>
