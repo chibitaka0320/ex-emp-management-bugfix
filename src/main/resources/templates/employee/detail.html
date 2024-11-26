@@ -38,6 +38,9 @@
             <li class="active">
               <a href="list.html" th:href="@{/employee/showList}">従業員管理</a>
             </li>
+            <li>
+              <a href="#" th:href="@{/employee/toInsert}">従業員登録</a>
+            </li>
           </ul>
           <p class="navbar-text navbar-right">
             <span sec:authentication="name">山田太郎</span>さんこんにちは！ &nbsp;&nbsp;&nbsp;
@@ -79,7 +82,7 @@
                 <tr>
                   <th nowrap>写真</th>
                   <td>
-                    <img src="../../static/img/e2.png" th:src="${'/img/' + employee.image}" />
+                    <img src="../../static/img/e2.png" th:src="${'/employee/' + employee.image}" class="emp-img" />
                   </td>
                 </tr>
                 <tr>
