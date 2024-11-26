@@ -25,8 +25,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authz -> authz
                 .requestMatchers("/", "/toInsert", "/insert", "/css/**", "/img/**", "/js/**").permitAll()
-                // .anyRequest().authenticated());
-                .anyRequest().permitAll());
+                .anyRequest().authenticated());
 
         return http.build();
     }
