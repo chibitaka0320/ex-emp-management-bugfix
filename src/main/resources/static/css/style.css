@@ -9,3 +9,13 @@
 .error-messages {
   color: #ff0000;
 }
+
+.emp-img {
+  width: 70px;
+}
+
+.gender {
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
