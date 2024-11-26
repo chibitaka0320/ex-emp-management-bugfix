@@ -68,4 +68,14 @@ public class EmployeeService {
 		}
 		return employeeList;
 	}
+
+	/**
+	 * 従業員情報の名前一覧を取得します.
+	 *
+	 * @return 従業員情報の名前一覧
+	 */
+	public List<String> getNameList() {
+		List<String> employeeNameList = employeeRepository.findAllNameList();
+		return employeeNameList;
+	}
 }
