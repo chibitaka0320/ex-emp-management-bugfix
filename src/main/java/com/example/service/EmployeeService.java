@@ -79,6 +79,16 @@ public class EmployeeService {
 	}
 
 	/**
+	 * 従業員情報の名前一覧を取得します.
+	 *
+	 * @return 従業員情報の名前一覧
+	 */
+	public List<String> getNameList() {
+		List<String> employeeNameList = employeeRepository.findAllNameList();
+		return employeeNameList;
+	}
+
+	/**
 	 * 従業員情報を追加します.
 	 *
 	 * @param form 従業員フォーム
