@@ -3,7 +3,7 @@ package com.example.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,7 +52,9 @@ public class EmployeeController {
 	 * @return 従業員一覧画面
 	 */
 	@GetMapping("/showList")
-	public String showList(@AuthenticationPrincipal LoginAdministrator userDetails, Model model) {
+	public String showList(Model model) {
+		System.out.println(((LoginAdministrator) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+				.getPassword());
 		List<Employee> employeeList = employeeService.showList();
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";

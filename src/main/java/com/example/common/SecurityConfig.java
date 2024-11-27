@@ -14,18 +14,25 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(authz -> authz
+                .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
+                .requestMatchers("/", "/toInsert", "/insert")
+                .permitAll()
+                .anyRequest().authenticated());
+
         http.formLogin(login -> login
                 .loginProcessingUrl("/login")
                 .loginPage("/")
-                .defaultSuccessUrl("/employee/showList")
+                .defaultSuccessUrl("/employee/showList", true)
                 .failureUrl("/?result=error")
                 .usernameParameter("mailAddress")
                 .passwordParameter("password")
                 .permitAll());
 
-        http.authorizeHttpRequests(authz -> authz
-                .requestMatchers("/", "/toInsert", "/insert", "/css/**", "/img/**", "/js/**").permitAll()
-                .anyRequest().authenticated());
+        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendRedirect("/?error=unauthorized");
+                }));
 
         return http.build();
     }

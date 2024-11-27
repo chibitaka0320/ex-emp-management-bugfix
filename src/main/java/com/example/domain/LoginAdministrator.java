@@ -75,4 +75,9 @@ public class LoginAdministrator implements UserDetails {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "LoginAdministrator [administrator=" + administrator + "]";
+    }
+
 }
